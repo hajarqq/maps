@@ -64,7 +64,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
       mode: _mode,
       language: 'fr',
       strictbounds: false,
-      types: ["blood donate center"],
+      types: ["blood donation center"],
       decoration: InputDecoration(
         hintText: 'Search',
         focusedBorder: OutlineInputBorder(
