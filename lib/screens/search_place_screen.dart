@@ -11,8 +11,7 @@ class SearchPlacesScreen extends StatefulWidget {
   State<SearchPlacesScreen> createState() => _SearchPlacesScreenState();
 }
 
-const kGoogleApiKey = 'AIzaSyDS1ysVJh0SGrGAF30dzu8C-9F7cT_7m5M';
-//final homeScaffoldKey = GlobalKey<ScaffoldState>();
+const String kGoogleApiKey = 'AIzaSyDS1ysVJh0SGrGAF30dzu8C-9F7cT_7m5M';
 
 class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
   static const CameraPosition initialCameraPosition =
@@ -20,7 +19,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
-  Set<Marker> markersList = {};
+  Set<Marker> markersList = <Marker>{};
 
   late GoogleMapController googleMapController;
 
@@ -28,13 +27,14 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final EdgeInsets padding = MediaQuery.of(context).padding;
     return Scaffold(
       key: homeScaffoldKey,
       appBar: AppBar(
         title: const Text("Google Search Places"),
       ),
       body: Stack(
-        children: [
+        children: <Widget>[
           GoogleMap(
             initialCameraPosition: initialCameraPosition,
             markers: markersList,
@@ -43,9 +43,13 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
               googleMapController = controller;
             },
           ),
-          ElevatedButton(
-            onPressed: _handlePressButton,
-            child: const Text("Search Places"),
+          PositionedDirectional(
+            top: padding.top,
+            start: padding.left,
+            child: ElevatedButton(
+              onPressed: _handlePressButton,
+              child: const Text("Search Places"),
+            ),
           ),
         ],
       ),
@@ -68,7 +72,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
           borderSide: const BorderSide(color: Colors.white),
         ),
       ),
-      components: [
+      components: <Component>[
         Component(Component.country, "pk"),
         Component(Component.country, "usa")
       ],
@@ -92,8 +96,8 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
     PlacesDetailsResponse detail = await places.getDetailsByPlaceId(p.placeId!);
 
-    final lat = detail.result.geometry!.location.lat;
-    final lng = detail.result.geometry!.location.lng;
+    final double lat = detail.result.geometry!.location.lat;
+    final double lng = detail.result.geometry!.location.lng;
 
     markersList.clear();
     markersList.add(

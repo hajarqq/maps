@@ -11,7 +11,8 @@ class SimpleMapScreen extends StatefulWidget {
 }
 
 class _SimpleMapScreenState extends State<SimpleMapScreen> {
-  final Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
 
   static const CameraPosition initialPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
