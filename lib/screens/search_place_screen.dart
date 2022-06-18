@@ -31,7 +31,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
     return Scaffold(
       key: homeScaffoldKey,
       appBar: AppBar(
-        title: const Text("Google Search Places"),
+        title: const Text("Chercher des centres donation"),
       ),
       body: Stack(
         children: <Widget>[
@@ -44,11 +44,11 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
             },
           ),
           PositionedDirectional(
-            top: padding.top,
-            start: padding.left,
+            top: 8,
+            start: 16,
             child: ElevatedButton(
               onPressed: _handlePressButton,
-              child: const Text("Search Places"),
+              child: const Text("Rechercher des lieux"),
             ),
           ),
         ],

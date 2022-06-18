@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'screens/current_location_screen.dart';
 import 'screens/search_place_screen.dart';
-import 'screens/simple_map_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -14,11 +12,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
+      /*
       appBar: AppBar(
         title: const Text("Flutter Google Maps"),
         centerTitle: true,
-      ),
+      ),*/
+      body: SearchPlacesScreen(),
+      /*
       body: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -59,6 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
+      */
     );
   }
 }
