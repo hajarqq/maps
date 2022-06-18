@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+
 import 'screens/current_location_screen.dart';
 import 'screens/search_place_screen.dart';
 import 'screens/simple_map_screen.dart';
@@ -8,7 +8,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -23,23 +23,39 @@ class _HomeScreenState extends State<HomeScreen> {
         width: MediaQuery.of(context).size.width,
         child: Column(
           children: [
-            ElevatedButton(onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const SimpleMapScreen();
-              }));
-            }, child: const Text("Simple Map")),
-
-            ElevatedButton(onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const CurrentLocationScreen();
-              }));
-            }, child: const Text("User current location")),
-
-            ElevatedButton(onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const SearchPlacesScreen();
-              }));
-            }, child: const Text("Search Places"))
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (BuildContext context) {
+                    return const SimpleMapScreen();
+                  }),
+                );
+              },
+              child: const Text("Simple Map"),
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return const CurrentLocationScreen();
+                      },
+                    ),
+                  );
+                },
+                child: const Text("User current location")),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) {
+                      return const SearchPlacesScreen();
+                    },
+                  ),
+                );
+              },
+              child: const Text("Search Places"),
+            ),
           ],
         ),
       ),

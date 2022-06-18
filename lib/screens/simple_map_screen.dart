@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:flutter/foundation.dart';
+
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -7,15 +7,23 @@ class SimpleMapScreen extends StatefulWidget {
   const SimpleMapScreen({Key? key}) : super(key: key);
 
   @override
-  _SimpleMapScreenState createState() => _SimpleMapScreenState();
+  State<SimpleMapScreen> createState() => _SimpleMapScreenState();
 }
 
 class _SimpleMapScreenState extends State<SimpleMapScreen> {
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const CameraPosition initialPosition = CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 14.0);
+  static const CameraPosition initialPosition = CameraPosition(
+    target: LatLng(37.42796133580664, -122.085749655962),
+    zoom: 14.0,
+  );
 
-  static const CameraPosition targetPosition = CameraPosition(target: LatLng(37.43296265331129, -122.08832357078792), zoom: 14.0, bearing: 192.0, tilt: 60);
+  static const CameraPosition targetPosition = CameraPosition(
+    target: LatLng(37.43296265331129, -122.08832357078792),
+    zoom: 14.0,
+    bearing: 192.0,
+    tilt: 60,
+  );
 
   @override
   Widget build(BuildContext context) {
