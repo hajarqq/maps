@@ -19,11 +19,47 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
 
   final GlobalKey<ScaffoldState> homeScaffoldKey = GlobalKey<ScaffoldState>();
 
-  Set<Marker> markersList = <Marker>{};
+  Set<Circle> circles = <Circle>{};
+  List<Marker> markers = <Marker>[];
 
   late GoogleMapController googleMapController;
 
   final Mode _mode = Mode.overlay;
+
+  @override
+  void initState() {
+    super.initState();
+    // add markers
+    markers.add(
+      Marker(
+        markerId: const MarkerId('first_marker'),
+        position: initialCameraPosition.target,
+        infoWindow: const InfoWindow(
+          title: 'Marker Title',
+          snippet: 'Marker snippet',
+        ),
+        icon: BitmapDescriptor.defaultMarker,
+      ),
+    );
+
+    // add circles
+    circles = {
+      Circle(
+        circleId: const CircleId('first_circle'),
+        center: initialCameraPosition.target,
+        radius: 100,
+        fillColor: Colors.red.withOpacity(0.1),
+        strokeColor: Colors.red.withOpacity(0.5),
+        strokeWidth: 2,
+      ),
+    };
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(initialCameraPosition),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +73,14 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
         children: <Widget>[
           GoogleMap(
             initialCameraPosition: initialCameraPosition,
-            markers: markersList,
             mapType: MapType.normal,
             onMapCreated: (GoogleMapController controller) {
               googleMapController = controller;
             },
+            // markers
+            markers: Set<Marker>.of(markers),
+            // set circles
+            circles: circles,
           ),
           PositionedDirectional(
             top: 8,
@@ -73,6 +112,7 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
         ),
       ),
       components: <Component>[
+        Component(Component.country, "ma"),
         Component(Component.country, "pk"),
         Component(Component.country, "usa")
       ],
@@ -99,8 +139,8 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
     final double lat = detail.result.geometry!.location.lat;
     final double lng = detail.result.geometry!.location.lng;
 
-    markersList.clear();
-    markersList.add(
+    markers.clear();
+    markers.add(
       Marker(
         markerId: const MarkerId("0"),
         position: LatLng(lat, lng),

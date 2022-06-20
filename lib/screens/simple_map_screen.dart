@@ -11,8 +11,7 @@ class SimpleMapScreen extends StatefulWidget {
 }
 
 class _SimpleMapScreenState extends State<SimpleMapScreen> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
+  GoogleMapController? googleMapController;
 
   static const CameraPosition initialPosition = CameraPosition(
     target: LatLng(37.42796133580664, -122.085749655962),
@@ -37,7 +36,7 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
         initialCameraPosition: initialPosition,
         mapType: MapType.normal,
         onMapCreated: (GoogleMapController controller) {
-          _controller.complete(controller);
+          googleMapController = controller;
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
@@ -51,7 +50,7 @@ class _SimpleMapScreenState extends State<SimpleMapScreen> {
   }
 
   Future<void> goToLake() async {
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(CameraUpdate.newCameraPosition(targetPosition));
+    googleMapController
+        ?.animateCamera(CameraUpdate.newCameraPosition(targetPosition));
   }
 }
