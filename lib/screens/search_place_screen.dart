@@ -64,13 +64,16 @@ class _SearchPlacesScreenState extends State<SearchPlacesScreen> {
               child: const Text("Rechercher des lieux"),
             ),
           ),
+          PositionedDirectional(
+              bottom: padding.bottom,
+              start: 16,
+              child: FloatingActionButton(
+                onPressed: () {
+                  _getCurrentLocation();
+                },
+                child: const Icon(Icons.place),
+              )),
         ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _getCurrentLocation();
-        },
-        child: const Icon(Icons.directions_boat),
       ),
     );
   }
